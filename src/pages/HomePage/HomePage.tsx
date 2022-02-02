@@ -1,7 +1,13 @@
+import { ExampleComponent } from "../../components";
 import "../../App.css";
 
 function HomePage() {
-  return <h1>home page</h1>;
+  return (
+    <div>
+      <h1>home page</h1>
+      <ExampleComponent />
+    </div>
+  );
 }
 
 export default HomePage;
