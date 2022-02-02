@@ -1,1 +1,3 @@
-export { default } from "./AboutPage";
+import AboutPage from './AboutPage';
+
+export default AboutPage;

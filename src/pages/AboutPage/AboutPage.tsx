@@ -1,13 +1,11 @@
-import "../../App.css";
-import { ExampleComponent } from "../../components";
+import '../../App.css';
+import { ExampleComponent2 } from '../../components';
 
-function AboutPage() {
-  return (
-    <div>
-      <h1>About page</h1>
-      <ExampleComponent />
-    </div>
-  );
-}
+const AboutPage = () => (
+  <div>
+    <h1>About page</h1>
+    <ExampleComponent2 />
+  </div>
+);
 
 export default AboutPage;
