@@ -4,6 +4,8 @@ const LangLandingLayout = () => (
   <SplashTemplate
     nameEng="Some awesome app."
     nameFra="Une application merveilleuse."
+    indexEng="/en/home"
+    indexFra="/fr/accueil"
   />
 );
 

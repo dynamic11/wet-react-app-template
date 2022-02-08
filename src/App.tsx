@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { IntlProvider } from 'react-intl';
 import { WetProvider, useLanguage, Language } from '@arcnovus/wet-boew-react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Route, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout, LangLandingLayout } from './layouts';
 import { HomePage, AboutPage } from './pages';
-import msg from './i18n/lang';
-// import * as messagesFr from './i18n/lang/fr';
+import { LocalizedRoutes, i18nMessages } from './i18n';
+import AppRoute from './AppRoute';
 
 const App = () => {
   const { currentLanguage } = useLanguage(useLocation());
@@ -25,13 +25,15 @@ const App = () => {
       ) : (
         <IntlProvider
           locale={currentLanguage}
-          messages={currentLanguage === Language.FR ? msg.fr : msg.en}
+          messages={
+            currentLanguage === Language.FR ? i18nMessages.fr : i18nMessages.en
+          }
         >
           <AppLayout>
-            <Routes>
-              <Route path="/:lang" element={<HomePage />} />
-              <Route path="/:lang/about" element={<AboutPage />} />
-            </Routes>
+            <LocalizedRoutes>
+              <Route path={AppRoute.Home} element={<HomePage />} />
+              <Route path={AppRoute.About} element={<AboutPage />} />
+            </LocalizedRoutes>
           </AppLayout>
         </IntlProvider>
       )}

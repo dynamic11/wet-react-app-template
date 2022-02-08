@@ -1,31 +1,46 @@
 import { AppTemplate } from '@arcnovus/wet-boew-react';
+import { useIntl } from 'react-intl';
+import AppRoute from '../../AppRoute';
+import { getLocalizedPath } from '../../i18n/utils/LocalizedNavigate';
+import getMatchingRoute from '../../i18n/utils/MatchingRoute';
 
 export interface AppLayoutProps {
   /** Contents of label */
   children?: React.ReactNode;
 }
 
-const AppLayout = ({ children }: AppLayoutProps) => (
-  <AppTemplate
-    appName={[
-      {
-        href: '/',
-        text: 'sample app',
-      },
-    ]}
-    menuLinks={[
-      {
-        href: '/en/',
-        text: 'Home',
-      },
-      {
-        href: '/en/about',
-        text: 'About',
-      },
-    ]}
-  >
-    {children}
-  </AppTemplate>
-);
+const AppLayout = ({ children }: AppLayoutProps) => {
+  const { formatMessage } = useIntl();
+
+  return (
+    <AppTemplate
+      appName={[
+        {
+          href: getLocalizedPath(AppRoute.Home),
+          text: formatMessage({ id: 'app.title' }),
+        },
+      ]}
+      menuLinks={[
+        {
+          href: getLocalizedPath(AppRoute.Home),
+          text: formatMessage({ id: 'menu.home' }),
+        },
+        {
+          href: getLocalizedPath(AppRoute.About),
+          text: formatMessage({ id: 'menu.about' }),
+        },
+      ]}
+      lngLinks={[
+        {
+          href: getMatchingRoute(),
+          lang: formatMessage({ id: 'language.other.locale' }) as 'en' | 'fr',
+          text: formatMessage({ id: 'language.other.name' }),
+        },
+      ]}
+    >
+      {children}
+    </AppTemplate>
+  );
+};
 
 export default AppLayout;
