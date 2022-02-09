@@ -2,6 +2,11 @@ import React from 'react';
 import { Routes, RouteProps } from 'react-router-dom';
 import { useIntl } from 'react-intl';
 
+/**
+ *
+ * `Routes` component from `react-router-dom` wrapped to accept
+ * `Route` components with paths that are from enum `AppRoute`
+ */
 const LocalizedRoutes: React.FC = ({ children }) => {
   /**
    * inject params and formatMessage through hooks, so we can localize the route

@@ -33,7 +33,7 @@ const AppLayout = ({ children }: AppLayoutProps) => {
       lngLinks={[
         {
           href: getMatchingRoute(),
-          lang: formatMessage({ id: 'language.other.locale' }) as 'en' | 'fr',
+          lang: formatMessage({ id: 'language.other.locale' }) as LanguageType,
           text: formatMessage({ id: 'language.other.name' }),
         },
       ]}

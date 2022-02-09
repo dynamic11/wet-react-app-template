@@ -4,12 +4,25 @@ import AppRoute from '../../AppRoute';
 
 /**
  *
- * @param route of enum AppRoute
+ * @param {AppRoute} route AppRoute enum of desired path
+ * @param {LanguageType}[language] language of path returned
  * @returns Localized string path of given AppRoute
  */
-export const getLocalizedPath = (route: AppRoute): `/${string}` => {
+export const getLocalizedPath = (
+  route: AppRoute,
+  language?: LanguageType
+): hrefType => {
   const { formatMessage, locale } = useIntl();
-  return `/${locale}${formatMessage({ id: route })}`;
+
+  let urlLanguage: LanguageType;
+
+  if (language) {
+    urlLanguage = language;
+  } else {
+    urlLanguage = locale as LanguageType;
+  }
+
+  return `/${urlLanguage}${formatMessage({ id: route })}`;
 };
 
 /**

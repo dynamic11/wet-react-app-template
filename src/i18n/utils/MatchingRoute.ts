@@ -3,11 +3,17 @@ import { useLocation } from 'react-router-dom';
 import { i18nMessages } from '..';
 import { LanguageStrings } from '../lang/en';
 
-const getMatchingRoute = (): `/${string}` => {
+/**
+ *
+ * To find the translated route of the current page.
+ * Is useful when switching language on current page
+ * @returns Translated matching route for current page
+ */
+const getMatchingRoute = (): hrefType => {
   const { pathname } = useLocation();
   const { messages, locale } = useIntl();
 
-  let language: 'en' | 'fr';
+  let language: LanguageType;
 
   if (locale === 'en') {
     language = 'fr';
