@@ -20,23 +20,23 @@ const App = () => {
 
   return (
     <WetProvider linkHandler={handleClick}>
-      {currentLanguage == null ? (
-        <LangLandingLayout />
-      ) : (
-        <IntlProvider
-          locale={currentLanguage}
-          messages={
-            currentLanguage === Language.FR ? i18nMessages.fr : i18nMessages.en
-          }
-        >
+      <IntlProvider
+        locale={`${currentLanguage || 'en'}`}
+        messages={
+          currentLanguage === Language.FR ? i18nMessages.fr : i18nMessages.en
+        }
+      >
+        {currentLanguage == null ? (
+          <LangLandingLayout />
+        ) : (
           <AppLayout>
             <LocalizedRoutes>
               <Route path={AppRoute.Home} element={<HomePage />} />
               <Route path={AppRoute.About} element={<AboutPage />} />
             </LocalizedRoutes>
           </AppLayout>
-        </IntlProvider>
-      )}
+        )}{' '}
+      </IntlProvider>
     </WetProvider>
   );
 };
