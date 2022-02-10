@@ -7,7 +7,8 @@ export const en = {
   'menu.home': 'Home',
   'menu.about': 'About',
 
-  'test.title': 'Title here',
+  'home.title': 'Home',
+  'about.title': 'About us',
 
   'route.home': '/home',
   'route.about': '/about',

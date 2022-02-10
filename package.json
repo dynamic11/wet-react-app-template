@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@arcnovus/wet-boew-react": "^1.0.15-alpha.1",
+    "@dynamic11/react-wet": "^0.2.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
