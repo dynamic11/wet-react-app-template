@@ -42,9 +42,3 @@ jobs:
 
       - name: Run Prettier Check
         run: npm run prettier
-
-      - name: Run test
-        run: npm run test
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
