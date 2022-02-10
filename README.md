@@ -1,8 +1,44 @@
-# Getting Started with Create React App
+# :rocket: WET React Project Template
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![Linting Check](https://github.com/dynamic11/wet-react-app-template/actions/workflows/ci-tests.yml/badge.svg?branch=master)](https://github.com/dynamic11/wet-react-app-template/actions/workflows/ci-tests.yml)
 
-## Available Scripts
+:warning: This project is early stages of development. We are working hard to implement more features. :warning:
+
+## Introduction
+
+This is a template repo that can be used as a starting point for any React based project wishing to utilize the CDTS App Template and WET-React components.
+
+**This project utilizes:**
+
+- [Create React App](https://github.com/facebook/create-react-app): For project bootstrapping
+- [WET-React](https://github.com/dynamic11/wet-react): For WET themed React components
+- [arcnovus/wet-boew-react](https://www.npmjs.com/package/@arcnovus/wet-boew-react): For CDTS page layouts
+- [CDTS Templates](https://cenw-wscoe.github.io/sgdc-cdts/docs/index-en.html): For page layout guidelines
+
+## Getting Started
+
+### How to run locally
+
+1. clone the repo to you local machine
+2. open terminal inside the project directory
+3. install packages using `npm install`
+4. launch app using `npm start`
+5. navigate to `http://localhost:3000` to see the project running
+
+### Project scripts
+
+Here is what each script in the `package.json` does:
+
+- `start`: see 'CRA Scripts' section below
+- `test`: see 'CRA Scripts' section below
+- `build`: see 'CRA Scripts' section below
+- `eject`: see 'CRA Scripts' section below
+- `lint`: runs ESlint to check for issues
+- `lint:fix`: runs ESlint to check for issues and auto fixes them
+- `prettier`: runs prettier to check for code styling issues
+- `prettier:fix`: runs prettier to check for code styling issues and auto fixes them
+
+## CRA Scripts
 
 In the project directory, you can run:
 
