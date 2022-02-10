@@ -35,7 +35,7 @@ const App = () => {
               <Route path={AppRoute.About} element={<AboutPage />} />
             </LocalizedRoutes>
           </AppLayout>
-        )}{' '}
+        )}
       </IntlProvider>
     </WetProvider>
   );
