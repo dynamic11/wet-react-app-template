@@ -1,14 +1,13 @@
 import { FormattedMessage } from 'react-intl';
-import { PageTitle } from '@arcnovus/wet-boew-react';
+import { Title } from '@dynamic11/react-wet';
 import { ExampleComponent } from '../../components';
 import '../../App.css';
 
 const HomePage = () => (
   <div>
-    <FormattedMessage id="test.title">
-      {(title) => <PageTitle text={`${title}`} />}
-    </FormattedMessage>
-    <h1>home page</h1>
+    <Title level="h1">
+      <FormattedMessage id="test.title" />
+    </Title>
     <ExampleComponent />
   </div>
 );

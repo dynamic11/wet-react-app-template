@@ -1,3 +1,4 @@
+import { Button } from '@dynamic11/react-wet';
 import '../../App.css';
 
 const ExampleComponent = () => (
@@ -10,6 +11,7 @@ const ExampleComponent = () => (
     }}
   >
     <p>Example Component</p>
+    <Button>Example Button</Button>
   </div>
 );
 
