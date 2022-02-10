@@ -31,6 +31,7 @@ const App = () => {
         ) : (
           <AppLayout>
             <LocalizedRoutes>
+              <Route path="/" element={<HomePage />} />
               <Route path={AppRoute.Home} element={<HomePage />} />
               <Route path={AppRoute.About} element={<AboutPage />} />
             </LocalizedRoutes>

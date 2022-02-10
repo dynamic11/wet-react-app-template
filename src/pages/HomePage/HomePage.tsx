@@ -6,7 +6,7 @@ import '../../App.css';
 const HomePage = () => (
   <div>
     <Title level="h1">
-      <FormattedMessage id="test.title" />
+      <FormattedMessage id="home.title" />
     </Title>
     <ExampleComponent />
   </div>

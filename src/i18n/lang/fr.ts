@@ -9,7 +9,8 @@ const fr: LanguageStrings = {
   'menu.home': 'Accueil',
   'menu.about': 'A propos',
 
-  'test.title': 'titre ici',
+  'home.title': 'Accueil',
+  'about.title': 'A propos',
 
   'route.home': '/accueil',
   'route.about': '/apropos',
