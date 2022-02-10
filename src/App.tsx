@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { IntlProvider } from 'react-intl';
 import { WetProvider, useLanguage, Language } from '@arcnovus/wet-boew-react';
-import { Route, useLocation, useNavigate } from 'react-router-dom';
+import { HashRouter, Route, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout, LangLandingLayout } from './layouts';
 import { HomePage, AboutPage } from './pages';
 import { LocalizedRoutes, i18nMessages } from './i18n';
@@ -30,11 +30,13 @@ const App = () => {
           <LangLandingLayout />
         ) : (
           <AppLayout>
-            <LocalizedRoutes>
-              <Route path="/" element={<HomePage />} />
-              <Route path={AppRoute.Home} element={<HomePage />} />
-              <Route path={AppRoute.About} element={<AboutPage />} />
-            </LocalizedRoutes>
+            <HashRouter>
+              <LocalizedRoutes>
+                <Route path="/" element={<HomePage />} />
+                <Route path={AppRoute.Home} element={<HomePage />} />
+                <Route path={AppRoute.About} element={<AboutPage />} />
+              </LocalizedRoutes>
+            </HashRouter>
           </AppLayout>
         )}
       </IntlProvider>
