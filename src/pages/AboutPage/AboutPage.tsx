@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { Title } from '@dynamic11/react-wet';
+import { Title } from '@dynamic11/wet-react';
 import { ExampleComponent2 } from '../../components';
 import '../../App.css';
 

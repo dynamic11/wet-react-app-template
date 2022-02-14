@@ -1,4 +1,4 @@
-import { Button } from '@dynamic11/react-wet';
+import { Button } from '@dynamic11/wet-react';
 import '../../App.css';
 
 const ExampleComponent = () => (
