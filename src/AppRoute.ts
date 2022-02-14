@@ -2,5 +2,6 @@
 const enum AppRoute {
   Home = 'route.home',
   About = 'route.about',
+  ExampleForm = 'route.example.form',
 }
 export default AppRoute;
