@@ -1,5 +1,5 @@
 import { FormattedMessage } from 'react-intl';
-import { Title, Button, Form, Label } from '@dynamic11/wet-react';
+import { Title, Button, Form, Label, Alert, Link } from '@dynamic11/wet-react';
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import '../../App.css';
@@ -17,6 +17,7 @@ type FormInputType = {
 
 const ExampleFormPage = () => {
   const {
+    register,
     handleSubmit,
     watch,
     control,
@@ -27,12 +28,38 @@ const ExampleFormPage = () => {
   console.log('email:', watch('formEmail')); // watch input value by passing the name of it
   console.log('pass:', watch('formPass')); // watch input value by passing the name of it
   console.log('check:', watch('formCheckbox'));
+  // for (const property in errors) {
+  //   console.log(`${property}: ${errors[property]}`);
+  // }
 
   return (
     <>
       <Title level="h1">
         <FormattedMessage id="menu.example.form" />
       </Title>
+
+      <Alert isVisible variant="danger">
+        <Alert.Header>Form Errors</Alert.Header>
+        <Alert.Body>
+          <ul>
+            {Object.keys(errors).map((fieldName, index) => (
+              <li>
+                <Link href={`#${fieldName}`}>
+                  {`Error ${index}: `}
+                  <ErrorMessage errors={errors} name={fieldName as any} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Alert.Body>
+      </Alert>
+      {/* <Alert>
+        The form could not be submitted because {} errors were found.
+        {Object.keys(errors).map((fieldName) => (
+        <ErrorMessage errors={errors} name={fieldName as any} as="div" key={fieldName} />
+      ))}
+      </Alert> */}
+      {/* <ErrorSummary errors={errors} /> */}
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email address</Form.Label>
@@ -56,7 +83,7 @@ const ExampleFormPage = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formPass">
-          <Form.Label>Password</Form.Label>
+          <Form.Label isRequired>Password</Form.Label>
           <Controller
             name="formPass"
             control={control}
@@ -72,7 +99,12 @@ const ExampleFormPage = () => {
               },
             }}
             render={({ field }) => (
-              <Form.Control {...field} type="password" placeholder="Password" />
+              <Form.Control
+                {...field}
+                type="password"
+                placeholder="Password"
+                isRequired
+              />
             )}
           />
           <ErrorMessage
@@ -88,7 +120,12 @@ const ExampleFormPage = () => {
             control={control}
             rules={{ required: { value: true, message: 'This is required.' } }}
             render={({ field }) => (
-              <Form.Check {...field} type="checkbox" label="Check me out" />
+              <Form.Check
+                {...field}
+                type="checkbox"
+                label="Check me out"
+                isRequired
+              />
             )}
           />
           <ErrorMessage
