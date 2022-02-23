@@ -29,6 +29,10 @@ const AppLayout = ({ children }: AppLayoutProps) => {
           href: getLocalizedPath(AppRoute.About),
           text: formatMessage({ id: 'menu.about' }),
         },
+        {
+          href: getLocalizedPath(AppRoute.ExampleForm),
+          text: formatMessage({ id: 'menu.example.form' }),
+        },
       ]}
       lngLinks={[
         {

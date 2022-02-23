@@ -3,7 +3,7 @@ import { IntlProvider } from 'react-intl';
 import { WetProvider, useLanguage, Language } from '@arcnovus/wet-boew-react';
 import { Route, useLocation, useNavigate } from 'react-router-dom';
 import { AppLayout, LangLandingLayout } from './layouts';
-import { HomePage, AboutPage } from './pages';
+import { HomePage, AboutPage, ExampleFormPage } from './pages';
 import { LocalizedRoutes, i18nMessages } from './i18n';
 import AppRoute from './AppRoute';
 
@@ -34,6 +34,10 @@ const App = () => {
               <Route path="/" element={<HomePage />} />
               <Route path={AppRoute.Home} element={<HomePage />} />
               <Route path={AppRoute.About} element={<AboutPage />} />
+              <Route
+                path={AppRoute.ExampleForm}
+                element={<ExampleFormPage />}
+              />
             </LocalizedRoutes>
           </AppLayout>
         )}
