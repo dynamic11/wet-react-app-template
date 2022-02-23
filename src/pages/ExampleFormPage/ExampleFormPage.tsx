@@ -4,11 +4,6 @@ import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import '../../App.css';
 
-// const handleFormSubmit = (event: any) => {
-//   event.preventDefault();
-//   console.log('submitted', event.target.elements.formBasicEmail.value);
-// };
-
 type FormInputType = {
   formEmail: string;
   formPass: string;
@@ -17,20 +12,15 @@ type FormInputType = {
 
 const ExampleFormPage = () => {
   const {
-    register,
     handleSubmit,
-    watch,
     control,
     formState: { errors },
   } = useForm<FormInputType>();
-  const onSubmit = handleSubmit((data) => console.log(data));
 
-  console.log('email:', watch('formEmail')); // watch input value by passing the name of it
-  console.log('pass:', watch('formPass')); // watch input value by passing the name of it
-  console.log('check:', watch('formCheckbox'));
-  // for (const property in errors) {
-  //   console.log(`${property}: ${errors[property]}`);
-  // }
+  const onSubmit = handleSubmit((data) => {
+    alert('form submitted!');
+    console.log(data);
+  });
 
   return (
     <>
@@ -38,28 +28,22 @@ const ExampleFormPage = () => {
         <FormattedMessage id="menu.example.form" />
       </Title>
 
-      <Alert isVisible variant="danger">
+      <Alert isVisible={!!Object.keys(errors).length} variant="danger">
         <Alert.Header>Form Errors</Alert.Header>
         <Alert.Body>
           <ul>
             {Object.keys(errors).map((fieldName, index) => (
               <li>
                 <Link href={`#${fieldName}`}>
-                  {`Error ${index}: `}
-                  <ErrorMessage errors={errors} name={fieldName as any} />
+                  {`Error ${index + 1}: `}
+                  <ErrorMessage errors={errors} name={fieldName} />
                 </Link>
               </li>
             ))}
           </ul>
         </Alert.Body>
       </Alert>
-      {/* <Alert>
-        The form could not be submitted because {} errors were found.
-        {Object.keys(errors).map((fieldName) => (
-        <ErrorMessage errors={errors} name={fieldName as any} as="div" key={fieldName} />
-      ))}
-      </Alert> */}
-      {/* <ErrorSummary errors={errors} /> */}
+
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label>Email address</Form.Label>
@@ -79,6 +63,7 @@ const ExampleFormPage = () => {
             errors={errors}
             name="formEmail"
             as={<Label variant="danger" />}
+            isInvalid={!!errors.formEmail}
           />
         </Form.Group>
 
@@ -88,7 +73,7 @@ const ExampleFormPage = () => {
             name="formPass"
             control={control}
             rules={{
-              required: { value: true, message: 'This is required.' },
+              required: { value: true, message: 'This field is required.' },
               maxLength: {
                 value: 10,
                 message: 'Must be less than 10 characters',
@@ -104,6 +89,7 @@ const ExampleFormPage = () => {
                 type="password"
                 placeholder="Password"
                 isRequired
+                isInvalid={!!errors.formPass}
               />
             )}
           />
@@ -118,13 +104,16 @@ const ExampleFormPage = () => {
           <Controller
             name="formCheckbox"
             control={control}
-            rules={{ required: { value: true, message: 'This is required.' } }}
+            rules={{
+              required: { value: true, message: 'This field is required.' },
+            }}
             render={({ field }) => (
               <Form.Check
                 {...field}
                 type="checkbox"
                 label="Check me out"
                 isRequired
+                isInvalid={!!errors.formCheckbox}
               />
             )}
           />
