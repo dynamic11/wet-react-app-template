@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { useIntl, FormattedMessage } from 'react-intl';
 import { Title, Button, Form, Label, Alert, Link } from '@dynamic11/wet-react';
 import { useForm, Controller } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
@@ -11,6 +11,7 @@ type FormInputType = {
 };
 
 const ExampleFormPage = () => {
+  const intl = useIntl();
   const {
     handleSubmit,
     control,
@@ -18,8 +19,10 @@ const ExampleFormPage = () => {
   } = useForm<FormInputType>();
 
   const onSubmit = handleSubmit((data) => {
+    /* eslint-disable */
     alert('form submitted!');
     console.log(data);
+    /* eslint-enable */
   });
 
   return (
@@ -29,7 +32,9 @@ const ExampleFormPage = () => {
       </Title>
 
       <Alert isVisible={!!Object.keys(errors).length} variant="danger">
-        <Alert.Header>Form Errors</Alert.Header>
+        <Alert.Header>
+          <FormattedMessage id="form.errors" />
+        </Alert.Header>
         <Alert.Body>
           <ul>
             {Object.keys(errors).map((fieldName, index) => (
@@ -46,19 +51,34 @@ const ExampleFormPage = () => {
 
       <Form onSubmit={onSubmit}>
         <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Email address</Form.Label>
+          <Form.Label
+            isRequired
+            requiredText={intl.formatMessage({ id: 'required' })}
+          >
+            <FormattedMessage id="email.address" />
+          </Form.Label>
           <Controller
             name="formEmail"
             control={control}
-            rules={{ required: { value: true, message: 'This is required.' } }}
+            rules={{
+              required: {
+                value: true,
+                message: intl.formatMessage({ id: 'required.field' }),
+              },
+            }}
             defaultValue="default@email.com"
             render={({ field }) => (
-              <Form.Control {...field} type="email" placeholder="Enter email" />
+              <Form.Control
+                {...field}
+                type="email"
+                placeholder={intl.formatMessage({ id: 'enter.email' })}
+              />
             )}
           />
           <Form.Text className="text-muted">
-            We will never share your email with anyone else.
+            <FormattedMessage id="never.share.email" />
           </Form.Text>
+          <br />
           <ErrorMessage
             errors={errors}
             name="formEmail"
@@ -68,12 +88,20 @@ const ExampleFormPage = () => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formPass">
-          <Form.Label isRequired>Password</Form.Label>
+          <Form.Label
+            isRequired
+            requiredText={intl.formatMessage({ id: 'required' })}
+          >
+            <FormattedMessage id="password" />
+          </Form.Label>
           <Controller
             name="formPass"
             control={control}
             rules={{
-              required: { value: true, message: 'This field is required.' },
+              required: {
+                value: true,
+                message: intl.formatMessage({ id: 'required.field' }),
+              },
               maxLength: {
                 value: 10,
                 message: 'Must be less than 10 characters',
@@ -87,7 +115,7 @@ const ExampleFormPage = () => {
               <Form.Control
                 {...field}
                 type="password"
-                placeholder="Password"
+                placeholder={intl.formatMessage({ id: 'password' })}
                 isRequired
                 isInvalid={!!errors.formPass}
               />
@@ -105,13 +133,16 @@ const ExampleFormPage = () => {
             name="formCheckbox"
             control={control}
             rules={{
-              required: { value: true, message: 'This field is required.' },
+              required: {
+                value: true,
+                message: intl.formatMessage({ id: 'required.field' }),
+              },
             }}
             render={({ field }) => (
               <Form.Check
                 {...field}
                 type="checkbox"
-                label="Check me out"
+                label={intl.formatMessage({ id: 'check.here' })}
                 isRequired
                 isInvalid={!!errors.formCheckbox}
               />
@@ -124,7 +155,7 @@ const ExampleFormPage = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          <FormattedMessage id="submit" />
         </Button>
       </Form>
     </>
