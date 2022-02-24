@@ -7,7 +7,7 @@ import '../../App.css';
 type FormInputType = {
   formEmail: string;
   formPass: string;
-  formCheckbox: boolean;
+  formCheckbox: string;
 };
 
 const ExampleFormPage = () => {
