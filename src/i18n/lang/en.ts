@@ -20,6 +20,7 @@ export const en = {
   'menu.about': 'About',
   'menu.example.form': 'Example form',
 
+  'route.landing': '/',
   'route.home': '/home',
   'route.about': '/about',
   'route.example.form': '/example-form',
