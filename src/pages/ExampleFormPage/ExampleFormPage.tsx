@@ -38,7 +38,7 @@ const ExampleFormPage = () => {
         <Alert.Body>
           <ul>
             {Object.keys(errors).map((fieldName, index) => (
-              <li>
+              <li key={fieldName}>
                 <Link href={`#${fieldName}`}>
                   {`Error ${index + 1}: `}
                   <ErrorMessage errors={errors} name={fieldName} />
@@ -87,7 +87,7 @@ const ExampleFormPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formPass">
+        <Form.Group className="mb-0" controlId="formPass">
           <Form.Label
             isRequired
             requiredText={intl.formatMessage({ id: 'required' })}
@@ -146,6 +146,7 @@ const ExampleFormPage = () => {
                 label={intl.formatMessage({ id: 'check.here' })}
                 isRequired
                 isInvalid={!!errors.formCheckbox}
+                className="mt-3 mb-1"
               />
             )}
           />
