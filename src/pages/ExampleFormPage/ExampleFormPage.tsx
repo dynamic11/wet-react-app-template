@@ -122,6 +122,7 @@ const ExampleFormPage = () => {
             )}
           />
           <ErrorMessage
+            className="form-field-alert"
             errors={errors}
             name="formPass"
             as={<Label variant="danger" />}
@@ -149,6 +150,7 @@ const ExampleFormPage = () => {
             )}
           />
           <ErrorMessage
+            className="form-field-alert"
             errors={errors}
             name="formCheckbox"
             as={<Label variant="danger" />}
