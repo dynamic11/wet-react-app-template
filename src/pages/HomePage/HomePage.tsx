@@ -9,6 +9,8 @@ const HomePage = () => (
       <FormattedMessage id="home.title" />
     </Title>
     <ExampleComponent />
+    <p>{process.env.REACT_APP_EXAMPLE}</p>
+    <p>{process.env.NODE_ENV}</p>
   </div>
 );
 
