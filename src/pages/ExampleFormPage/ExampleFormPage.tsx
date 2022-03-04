@@ -8,15 +8,25 @@ type FormInputType = {
   formEmail: string;
   formPass: string;
   formCheckbox: string;
+  sampleRadio: string;
 };
 
 const ExampleFormPage = () => {
-  const intl = useIntl();
+  const { formatMessage } = useIntl();
   const {
     handleSubmit,
+    watch,
     control,
     formState: { errors },
-  } = useForm<FormInputType>();
+  } = useForm<FormInputType>({
+    shouldUnregister: true,
+    defaultValues: { formEmail: 'default@email.com', formCheckbox: 'true' },
+  });
+
+  const [selectedFormcheckbox, selectedSampleRadio] = watch([
+    'formCheckbox',
+    'sampleRadio',
+  ]);
 
   const onSubmit = handleSubmit((data) => {
     /* eslint-disable */
@@ -53,7 +63,7 @@ const ExampleFormPage = () => {
         <Form.Group className="mb-3" controlId="formEmail">
           <Form.Label
             isRequired
-            requiredText={intl.formatMessage({ id: 'required' })}
+            requiredText={formatMessage({ id: 'required' })}
           >
             <FormattedMessage id="email.address" />
           </Form.Label>
@@ -63,15 +73,14 @@ const ExampleFormPage = () => {
             rules={{
               required: {
                 value: true,
-                message: intl.formatMessage({ id: 'required.field' }),
+                message: formatMessage({ id: 'required.field' }),
               },
             }}
-            defaultValue="default@email.com"
             render={({ field }) => (
               <Form.Control
                 {...field}
                 type="email"
-                placeholder={intl.formatMessage({ id: 'enter.email' })}
+                placeholder={formatMessage({ id: 'enter.email' })}
               />
             )}
           />
@@ -90,7 +99,7 @@ const ExampleFormPage = () => {
         <Form.Group className="mb-0" controlId="formPass">
           <Form.Label
             isRequired
-            requiredText={intl.formatMessage({ id: 'required' })}
+            requiredText={formatMessage({ id: 'required' })}
           >
             <FormattedMessage id="password" />
           </Form.Label>
@@ -100,7 +109,7 @@ const ExampleFormPage = () => {
             rules={{
               required: {
                 value: true,
-                message: intl.formatMessage({ id: 'required.field' }),
+                message: formatMessage({ id: 'required.field' }),
               },
               maxLength: {
                 value: 10,
@@ -115,7 +124,7 @@ const ExampleFormPage = () => {
               <Form.Control
                 {...field}
                 type="password"
-                placeholder={intl.formatMessage({ id: 'password' })}
+                placeholder={formatMessage({ id: 'password' })}
                 isRequired
                 isInvalid={!!errors.formPass}
               />
@@ -136,20 +145,65 @@ const ExampleFormPage = () => {
             rules={{
               required: {
                 value: true,
-                message: intl.formatMessage({ id: 'required.field' }),
+                message: formatMessage({ id: 'required.field' }),
               },
             }}
             render={({ field }) => (
               <Form.Check
                 {...field}
                 type="checkbox"
-                label={intl.formatMessage({ id: 'check.here' })}
+                label={formatMessage({ id: 'check.here' })}
                 isRequired
                 isInvalid={!!errors.formCheckbox}
                 className="mt-3 mb-1"
+                checked={!!selectedFormcheckbox}
               />
             )}
           />
+
+          {!!selectedFormcheckbox && (
+            <Form.Group className="mb-0" controlId="sampleRadio">
+              <Form.Label isRequired requiredText="custom required">
+                Are you cool?
+              </Form.Label>
+              <Controller
+                name="sampleRadio"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: formatMessage({ id: 'required.field' }),
+                  },
+                }}
+                render={({ field }) => (
+                  <>
+                    <Form.Check
+                      {...field}
+                      id="sampleRadio-yes"
+                      type="radio"
+                      label="Yes"
+                      value="true"
+                      checked={selectedSampleRadio === 'true'}
+                    />
+                    <Form.Check
+                      {...field}
+                      id="sampleRadio-no"
+                      type="radio"
+                      label="No"
+                      value="false"
+                      checked={selectedSampleRadio === 'false'}
+                    />
+                  </>
+                )}
+              />
+              <ErrorMessage
+                errors={errors}
+                name="sampleRadio"
+                as={<Label variant="danger" className="form-field-alert" />}
+                isInvalid={!!errors.sampleRadio}
+              />
+            </Form.Group>
+          )}
           <ErrorMessage
             className="form-field-alert"
             errors={errors}
