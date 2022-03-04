@@ -6,7 +6,7 @@ import getMatchingRoute from '../../i18n/utils/MatchingRoute';
 
 export interface AppLayoutProps {
   /** Contents of label */
-  children?: React.ReactNode;
+  children: React.ReactNode;
 }
 
 const AppLayout = ({ children }: AppLayoutProps) => {
