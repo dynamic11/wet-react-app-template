@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@arcnovus/wet-boew-react": "^1.0.15-alpha.4",
-    "@dynamic11/wet-react": "^0.4.6",
+    "@dynamic11/wet-react": "^0.4.7",
     "@hookform/error-message": "^2.0.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
