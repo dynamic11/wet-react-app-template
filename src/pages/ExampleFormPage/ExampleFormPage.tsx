@@ -1,5 +1,5 @@
 import { useIntl, FormattedMessage } from 'react-intl';
-import { Title, Button, Form, Label, Alert, Link } from '@dynamic11/wet-react';
+import { Title, Button, Form, Label, Alert } from '@dynamic11/wet-react';
 import { useForm, Controller, FieldErrors } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import '../../App.css';
