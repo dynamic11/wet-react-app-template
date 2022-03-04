@@ -24,6 +24,7 @@ const fr: LanguageStrings = {
   'menu.about': 'A propos',
   'menu.example.form': 'Exemple de formulaire',
 
+  'route.landing': '/',
   'route.home': '/accueil',
   'route.about': '/apropos',
   'route.example.form': '/exemple-de-formulaire',
