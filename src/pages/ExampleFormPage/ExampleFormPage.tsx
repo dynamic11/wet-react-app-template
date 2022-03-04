@@ -1,6 +1,6 @@
 import { useIntl, FormattedMessage } from 'react-intl';
 import { Title, Button, Form, Label, Alert, Link } from '@dynamic11/wet-react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm, Controller, FieldErrors } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import '../../App.css';
 
@@ -10,6 +10,36 @@ type FormInputType = {
   formCheckbox: string;
   sampleRadio: string;
 };
+
+interface FormErrorSummaryProps extends React.HTMLAttributes<HTMLElement> {
+  /** Errors to display */
+  errors: FieldErrors;
+}
+
+const FormErrorSummary = ({ errors, ...rest }: FormErrorSummaryProps) => (
+  <Alert isVisible={!!Object.keys(errors).length} variant="danger" {...rest}>
+    <Alert.Header level="h3">
+      <FormattedMessage id="form.errors" />
+    </Alert.Header>
+    <Alert.Body>
+      <ul>
+        {Object.keys(errors).map((fieldName, index) => (
+          <li key={fieldName}>
+            <Button
+              onClick={() => errors[fieldName].ref.focus()}
+              variant="link"
+              className="p-0"
+              size="lg"
+            >
+              {`Error ${index + 1}: `}
+              <ErrorMessage errors={errors} name={fieldName} />
+            </Button>
+          </li>
+        ))}
+      </ul>
+    </Alert.Body>
+  </Alert>
+);
 
 const ExampleFormPage = () => {
   const { formatMessage } = useIntl();
@@ -41,30 +71,16 @@ const ExampleFormPage = () => {
         <FormattedMessage id="menu.example.form" />
       </Title>
 
-      <Alert isVisible={!!Object.keys(errors).length} variant="danger">
-        <Alert.Header>
-          <FormattedMessage id="form.errors" />
-        </Alert.Header>
-        <Alert.Body>
-          <ul>
-            {Object.keys(errors).map((fieldName, index) => (
-              <li key={fieldName}>
-                <Link href={`#${fieldName}`}>
-                  {`Error ${index + 1}: `}
-                  <ErrorMessage errors={errors} name={fieldName} />
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Alert.Body>
-      </Alert>
+      <FormErrorSummary errors={errors} />
 
       <Form onSubmit={onSubmit}>
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label
-            isRequired
-            requiredText={formatMessage({ id: 'required' })}
-          >
+        <Form.Group
+          className="mb-3"
+          controlId="formEmail"
+          isInvalid={!!errors.formEmail}
+          isRequired
+        >
+          <Form.Label requiredText={formatMessage({ id: 'required' })}>
             <FormattedMessage id="email.address" />
           </Form.Label>
           <Controller
@@ -92,15 +108,16 @@ const ExampleFormPage = () => {
             errors={errors}
             name="formEmail"
             as={<Label variant="danger" />}
-            isInvalid={!!errors.formEmail}
           />
         </Form.Group>
 
-        <Form.Group className="mb-0" controlId="formPass">
-          <Form.Label
-            isRequired
-            requiredText={formatMessage({ id: 'required' })}
-          >
+        <Form.Group
+          className="mb-0"
+          controlId="formPass"
+          isInvalid={!!errors.formPass}
+          isRequired
+        >
+          <Form.Label requiredText={formatMessage({ id: 'required' })}>
             <FormattedMessage id="password" />
           </Form.Label>
           <Controller
@@ -125,8 +142,6 @@ const ExampleFormPage = () => {
                 {...field}
                 type="password"
                 placeholder={formatMessage({ id: 'password' })}
-                isRequired
-                isInvalid={!!errors.formPass}
               />
             )}
           />
@@ -138,7 +153,12 @@ const ExampleFormPage = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formCheckbox">
+        <Form.Group
+          className="mb-3"
+          controlId="formCheckbox"
+          isRequired
+          isInvalid={!!errors.formCheckbox}
+        >
           <Controller
             name="formCheckbox"
             control={control}
@@ -153,17 +173,27 @@ const ExampleFormPage = () => {
                 {...field}
                 type="checkbox"
                 label={formatMessage({ id: 'check.here' })}
-                isRequired
                 isInvalid={!!errors.formCheckbox}
                 className="mt-3 mb-1"
                 checked={!!selectedFormcheckbox}
               />
             )}
           />
+          <ErrorMessage
+            className="form-field-alert"
+            errors={errors}
+            name="formCheckbox"
+            as={<Label variant="danger" />}
+          />
 
           {!!selectedFormcheckbox && (
-            <Form.Group className="mb-0" controlId="sampleRadio">
-              <Form.Label isRequired requiredText="custom required">
+            <Form.Group
+              className="mt-4 mb-5"
+              controlId="sampleRadio"
+              isRequired
+              isInvalid={!!errors.sampleRadio}
+            >
+              <Form.Label requiredText="custom required">
                 Are you cool?
               </Form.Label>
               <Controller
@@ -200,16 +230,9 @@ const ExampleFormPage = () => {
                 errors={errors}
                 name="sampleRadio"
                 as={<Label variant="danger" className="form-field-alert" />}
-                isInvalid={!!errors.sampleRadio}
               />
             </Form.Group>
           )}
-          <ErrorMessage
-            className="form-field-alert"
-            errors={errors}
-            name="formCheckbox"
-            as={<Label variant="danger" />}
-          />
         </Form.Group>
         <Button variant="primary" type="submit">
           <FormattedMessage id="submit" />
